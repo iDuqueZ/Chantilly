@@ -1,0 +1,29 @@
+.Trans{
+    width: 500px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: #F2F2F2;
+    color: #353535;
+    text-align: center;
+    margin: auto;
+    border-radius: 10px;
+    position: relative;
+    margin-top: -30px;
+}
+
+.GridProductos{
+    width: 90%;
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.footer{
+    margin: auto;
+    text-align: center;
+    color: gray;
+}
+
+.bodyHome{
+    background-color: #F2F2F2;
+}
