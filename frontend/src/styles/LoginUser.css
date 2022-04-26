@@ -25,3 +25,21 @@
     margin: auto;
     text-align: center;
 }
+
+.Form .contenedor2 {
+    width: 380px;
+    margin: auto;
+}
+
+.Form .contenedor2 h3{
+    text-align: center;
+}
+
+.Form .contenedor2 a {
+    text-align: center;
+    display: block;
+}
+
+.Form .contenedor2 div{
+    margin-bottom: 6px;
+}

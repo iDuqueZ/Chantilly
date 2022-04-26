@@ -47,7 +47,7 @@ export default function LoginUser() {
                 </Button>
 
                 <p>¿Olvidaste tu contraseña o tienes algún problema?</p>
-                <a style={{color: '#4e4e4e'}} href='#register'>Registrarse</a>
+                <a style={{color: '#4e4e4e'}} href='/register'>Registrarse</a>
               </div>          
             </div>
         </div>
