@@ -17,7 +17,7 @@ AdminsCtr.crearAdmin = async(req,res) => {
             mensaje: 'El usuario ya existe'
         })
     }else{
-        
+
         NuevoAdmin.contrasena = await bcrypt.hash(contrasena,10)
         const token = jwt.sign({_id:NuevoAdmin._id},"Secreto")
         await NuevoAdmin.save()
@@ -30,3 +30,5 @@ AdminsCtr.crearAdmin = async(req,res) => {
         })
     }
 }
+
+module.exports = AdminsCtr
