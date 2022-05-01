@@ -1,6 +1,6 @@
 //Ivan necesito el ejemplo de un metodo o pon el metodo vacio y yo lo completo porfa
 const AdminsCtr = {}
-const Admin = require('../models/AdminMdl')
+const Admin = require('../models/Administrador.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 

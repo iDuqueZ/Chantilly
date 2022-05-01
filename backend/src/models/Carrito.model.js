@@ -11,3 +11,16 @@ const CarritoSchema = new Schema ({
 })
 
 module.exports = mongoose.model('carrito', CarritoSchema)
+/**
+ * {
+ *  {
+ *      idProducto,
+ *      numeroProductos,
+ *      descripcion
+ *  },
+ *  {
+ *      ...
+ *  }, 
+ *  ...
+ * }
+ */

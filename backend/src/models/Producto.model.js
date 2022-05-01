@@ -6,6 +6,7 @@ const ProductoSchema = new Schema ({
     precio: {type:Number, required: [true, 'El precio es obligatorio']},
     imagen: {type:String, required: [true, 'La imagen es obligatoria']},
     cantidad: {type:Number, required: [true, 'La cantidad es oligatoria']},
+    categoria: {type:String, required:[true, "La categoria debe ser obligatoria"]},
     descripcion: {type:String}
 })
 
