@@ -15,7 +15,7 @@ app.use(bodyparser.urlencoded({extended: true}));
 app.use(bodyparser.json());
 app.use(cors({origen: '*'}));
 
-app.use('Admin', require('./routers/Administrador.router'))/*
+app.use('/Admin', require('./routers/Administrador.router'))/*
 app.use('Carrito', require('./routers/Carrito'))
 app.use('Producto', require('./routers/ProductoRtr'))
 app.use('User', require('./routers/UserRtr'))//**/

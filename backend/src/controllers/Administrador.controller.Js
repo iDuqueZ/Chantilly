@@ -8,8 +8,7 @@ AdminsCtr.crearAdmin = async(req,res) => {
     const{user,contrasena,token} = req.body
     const NuevoAdmin = new Admin({
         user,
-        contrasena,
-        token
+        contrasena
     })
     const userAdmin = await Admin.findOne({user:user})
     if (userAdmin){
@@ -19,14 +18,14 @@ AdminsCtr.crearAdmin = async(req,res) => {
     }else{
 
         NuevoAdmin.contrasena = await bcrypt.hash(contrasena,10)
-        const token = jwt.sign({_id:NuevoAdmin._id},"Secreto")
+        NuevoAdmin.token = jwt.sign({_id:NuevoAdmin._id},"Secreto")
         await NuevoAdmin.save()
 
         res.json({
             mensaje: "Bienvenido",
             id: NuevoAdmin.id,
             user: NuevoAdmin.user,
-            token
+            token: NuevoAdmin.token
         })
     }
 }
