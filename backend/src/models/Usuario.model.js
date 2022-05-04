@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const {Schema} = mongoose 
 
 const UserSchema = new Schema({
-    username: {type:String, required: [true, 'El usuario es obligatorio']},
+    userName: {type:String, required: [true, 'El usuario es obligatorio']},
     contrasena: {type:String, required: [true, 'La contraseña es obligatorio']},
     correo: {type:String, required: [true, 'El correo es obligatorio']},
     fechaNacimiento: {type:Date, required: [true, 'La fecha es obligatorio']},

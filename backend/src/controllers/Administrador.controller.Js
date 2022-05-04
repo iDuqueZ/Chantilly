@@ -30,4 +30,5 @@ AdminsCtr.crearAdmin = async(req,res) => {
     }
 }
 
+
 module.exports = AdminsCtr
