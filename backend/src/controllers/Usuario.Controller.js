@@ -131,22 +131,44 @@ UsuariosCtr.eliminarUsuario = async(req,res) => {
     const UsuarioUserName = await Usuario.findOne({userName:userName})
 
     if (!UsuarioUserName){
-        print('El usuario no existe')
         res.json({
             mensaje: 'El usuario no existe'
         })
     }else if (!await bcrypt.compare(contrasena,UsuarioUserName.contrasena)){
-        print('La contrasena no coincide')
         res.json({
             mensaje: 'La contrasena no coincide'
         })
     }else{   
         const token = jwt.sign({_id:UsuarioUserName._id},"Secreto")
-        await UsuarioUserName.delete()
-        print("Usuario " + UsuarioUserName.userName + " fué eliminado")
+        await Usuario.findByIdAndRemove({_id:UsuarioUserName._id})
         res.json({
             mensaje: "Usuario " + UsuarioUserName.userName + " fué eliminado"
         })    
+    }
+}
+
+UsuariosCtr.listar = async(req,res) => {
+    const respuesta = await Usuario.find()
+    res.json(respuesta)
+}
+
+UsuariosCtr.listarId = async(req,res) => {
+    const id = req.params.id
+    const respuesta = await Usuario.findById({_id:id})
+    res.json(respuesta)
+}
+
+UsuariosCtr.buscarPorNombreDeUsuario = async(req,res) => { 
+    const nombreUsuario = req.params.nombreUsuario
+
+    try {
+        const respuesta = Usuario.find({userName: nombreUsuario})
+        res.json(respuesta)
+    } catch (error) {
+        return res.status(400).json({
+            mensaje : 'Ha ocurrido un error',
+            error
+        })
     }
 }
 
