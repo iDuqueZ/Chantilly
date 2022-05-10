@@ -1,10 +1,48 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Ilustracion from '../img/ilustracionLogin.png'
 import '../styles/LoginUser.css'
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button'
+import Axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function LoginUser() {
+
+  const [userName, setUser] = useState('')
+  const [contrasena, setContrasena] = useState('')
+
+    const login= async(e)=>{
+        e.preventDefault();
+        const user = {userName, contrasena}
+        const respuesta= await Axios.post('/User/login', user);
+        console.log(respuesta);
+        const mensaje= respuesta.data.mensaje;
+
+        if(mensaje !== 'Bienvenido'){
+            Swal.fire({
+                icon: 'error',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
+        }else {
+            const token = respuesta.data.token
+            const user= respuesta.data.userName
+            const idUser= respuesta.data._id
+
+            sessionStorage.setItem('token', token)
+            sessionStorage.setItem('user', user)
+            sessionStorage.setItem('idUser', idUser)
+            Swal.fire({
+                icon: 'success',
+                title: mensaje,
+                showConfirmButton: false,
+                timer: 1500
+            })
+            window.location.href = "/home"
+        }
+    }
+
   return (
     <div>
         <div className='bodyLoginUser'>
@@ -24,6 +62,7 @@ export default function LoginUser() {
                   autoComplete="user"
                   autoFocus
                   variant='filled'
+                  onChange={(e)=>setUser(e.target.value)}
                 />
                 <TextField
                   margin="normal"
@@ -35,6 +74,7 @@ export default function LoginUser() {
                   id="password"
                   autoComplete="current-password"
                   variant='filled'
+                  onChange={(e)=>setContrasena(e.target.value)}
                 />
                 <Button
                   type="submit"
@@ -42,6 +82,7 @@ export default function LoginUser() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                   style={{backgroundColor: '#F56CE8'}}
+                  onClick= {login}
                 >
                   Acceder
                 </Button>
