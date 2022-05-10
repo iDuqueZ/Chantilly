@@ -46,13 +46,8 @@ UsuariosCtr.crearUsuario = async(req,res) => {
         await NuevoUsuario.save()
         
         res.json({
-            mensaje: "Bienvenido"/*,
-            NomreUsuario: NuevoUsuario.userName,
-            contrasena: NuevoUsuario.contrasena,
-            correo: NuevoUsuario.correo,
-            fechaNacimiento: NuevoUsuario.fechaNacimiento,
-            direccion: NuevoUsuario.direccion,
-            telefono: NuevoUsuario.telefono//*/
+            mensaje: "Bienvenido",
+            token: token
         })
     }
 }
@@ -62,8 +57,8 @@ UsuariosCtr.validarUsuario = async(req,res) => {
     const Valuser = await Usuario.findOne({userName:userName})
     if (!Valuser){
         res.json({
-            mensaje: 'El usuario no existe',
-            Usuario: Usuario
+            mensaje : 'El usuario no existe',
+            Usuario : Usuario
         })
     }else{
         const comparacion = await bcrypt.compare(contrasena,Valuser.contrasena)
@@ -71,7 +66,8 @@ UsuariosCtr.validarUsuario = async(req,res) => {
             token = jwt.sign({_id:Valuser._id},"Secreto")
             res.json({
                 mensaje: 'Bienvenido ' + Valuser.userName + " Inicio de seccion sactisfactorio",
-                token: token
+                token: token,
+                Usuario: Valuser
             })
         }else{
             res.json({
