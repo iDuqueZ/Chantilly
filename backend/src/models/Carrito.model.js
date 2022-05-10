@@ -5,8 +5,8 @@ const CarritoSchema = new Schema ({
     susProductos: {type:Array},
     metodoPago: {type:String, default:"Efectivo"},
     fecha: {type:Date, default:Date.now},
-    hora: {type:Date, default:Date.now},
-    idUsuario: {type:Number, reuiere: true},
+    hora: {type:String, /*default:Date.now*/},
+    idUsuario: {type:String, reuiere: true},
     estadoPedido: {type:String, default:"En espera"}
 }) 
 

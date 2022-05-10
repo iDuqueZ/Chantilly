@@ -4,7 +4,7 @@ const CarritoCtrl = require('../controllers/Carrito.Controller')
 const Auth = require('../helper/Auth')
 
 router.post('/crear', CarritoCtrl.crearCarrito)
-//router.get('/login', Auth.verificarToken, CarritoCtrl.validarCarrito)
+router.get('/validarCarro', Auth.verificarToken, CarritoCtrl.validarCarro)
 //router.put('/Actualizar', Auth.verificarToken, CarritoCtrl.actualizarCarrito)
 //router.delete('/eliminar', Auth.verificarToken, CarritoCtrl.eliminarCarrito)
 //router.get('/listar', Auth.verificarToken, CarritoCtrl.listar)

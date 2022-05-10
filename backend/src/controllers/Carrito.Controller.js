@@ -1,52 +1,53 @@
 //Ivan necesito el ejemplo de un metodo o pon el metodo vacio y yo lo completo porfa
 const CarritoCtrl = {}
-const Carrito = require('../models/Carrito.model')
+const Carro = require('../models/Carrito.model')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
-CarritoCtrl.crearProducto = async(req,res) => {
-    const{nombre, precio, imagen, cantidad, categoria, descripcion} = req.body
-    const NuevoProducto = new Producto({
-        nombre, 
-        precio, 
-        imagen, 
-        //cantidad, 
-        categoria, 
-        descripcion
-    })
-    const prod = await Producto.findOne({nombre: nombre})
-    if (prod){
+CarritoCtrl.crearCarrito = async(req,res) => {
+    const{susProductos,metodoPago,fecha,hora,idUsuario,estadoPedido} = req.body
+    const NuevoCarrito = new Carro({
+        susProductos,
+        metodoPago,
+        fecha,
+        hora,
+        idUsuario,
+        estadoPedido
+    })/*
+    const Carrito = await Carro.find({idUsuario: idUsuario, fecha: fecha})
+    if (Carrito){
         res.json({
-            mensaje: 'El producto ya existe'
+            mensaje: 'El carro ya existe',
+            carro: Carrito
         })
         return
-    }else{
-        token = jwt.sign({_id:NuevoProducto._id},"Secreto")
-        await NuevoProducto.save()
+    }else{//*/
+        token = jwt.sign({_id:NuevoCarrito._id},"Secreto")
+        await NuevoCarrito.save()
         res.json({
             mensaje: "Bienvenido",
-            id: NuevoProducto.id,
-            nombreDeProducro: NuevoProducto.nombre,
+            id: NuevoCarrito.id,
+            nombreDelCarrito: NuevoCarrito.nombre,
+            token: token
+        })/*
+    }//*/
+}
+
+CarritoCtrl.validarCarro = async(req,res) => {
+    const{fecha, idUsuario} = req.body
+    const valCarro = await Carro.find({fecha: fecha, idUsuario: idUsuario})
+    if (!valCarro){
+        res.json({
+            mensaje: 'El carro no existe'
+        })
+    }else{
+        token = jwt.sign({_id:valCarro._id},"Secreto")
+        res.json({
+            mensaje: 'Carro: ' + valCarro.idUsuario + " " + valCarro.idUsuario +  " agregado correctamente",
             token: token
         })
     }
 }/*
-
-ProductoCtrl.validarProducto = async(req,res) => {
-    const{nombre} = req.body
-    const valProducto = await Producto.findOne({nombre:nombre})
-    if (!valProducto){
-        res.json({
-            mensaje: 'El producto no existe'
-        })
-    }else{
-        token = jwt.sign({_id:valProducto._id},"Secreto")
-        res.json({
-            mensaje: 'Producto: ' + valProducto.nombre + " agregado correctamente",
-            token: token
-        })
-    }
-}
 
 ProductoCtrl.actualizarProducto = async(req,res) => {
     const{nombre, precio, imagen, cantidad, categoria, descripcion} = req.body
