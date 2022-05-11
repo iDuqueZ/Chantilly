@@ -63,14 +63,13 @@ UsuariosCtr.validarUsuario = async(req,res) => {
     if (!Valuser){
         res.json({
             mensaje: 'El usuario no existe',
-            Usuario: Usuario
         })
     }else{
         const comparacion = await bcrypt.compare(contrasena,Valuser.contrasena)
         if (comparacion){
             token = jwt.sign({_id:Valuser._id},"Secreto")
             res.json({
-                mensaje: 'Bienvenido ' + Valuser.userName + " Inicio de seccion sactisfactorio",
+                mensaje: 'Bienvenido',
                 token: token
             })
         }else{
