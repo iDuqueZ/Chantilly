@@ -33,6 +33,7 @@ CarritoCtrl.crearCarrito = async(req,res) => {
     }//*/
 }
 
+/*
 CarritoCtrl.validarCarro = async(req,res) => {
     const{fecha, idUsuario} = req.body
     const valCarro = await Carro.find({fecha: fecha, idUsuario: idUsuario})
@@ -47,29 +48,31 @@ CarritoCtrl.validarCarro = async(req,res) => {
             token: token
         })
     }
-}/*
+}//*/
 
-ProductoCtrl.actualizarProducto = async(req,res) => {
-    const{nombre, precio, imagen, cantidad, categoria, descripcion} = req.body
-    const Prod = await Producto.findOne({nombre: nombre})
+CarritoCtrl.actualizarCarro = async(req,res) => {
+    const{id,susProductos,metodoPago,fecha,hora,idUsuario,estadoPedido} = req.body
+    const Carrito = await Carro.findById({_id:id})
 
-    if (!Prod){
+    if (!Carrito){
         res.json({
-            mensaje: 'El producto ' + nombre + ' no existe'
+            mensaje: 'El producto ' + id + ' no existe'
         })
     }else{   
-        Prod.precio = precio
-        Prod.imagen = imagen
-        Prod.categoria = categoria
-        Prod.descripcion = descripcion        
-        const token = jwt.sign({_id:Prod._id},"Secreto")
-        await Prod.save()        
+        Carrito.susProductos = susProductos
+        Carrito.metodoPago = metodoPago
+        Carrito.fecha = fecha
+        Carrito.hora = hora
+        Carrito.idUsuario = idUsuario
+        Carrito.estadoPedido = estadoPedido
+        const token = jwt.sign({_id:Carrito._id},"Secreto")
+        await Carrito.save()        
         res.json({
             mensaje: "El producto fué actualizado correctamente",
             token: token
         })    
     }
-}
+}/*
 
 ProductoCtrl.eliminarProducto = async(req,res) => {
     const{nombre} = req.body    

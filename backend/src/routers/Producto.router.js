@@ -4,7 +4,7 @@ const ProductoCtrl = require('../controllers/Producto.Controller')
 const Auth = require('../helper/Auth')
 
 router.post('/crear', ProductoCtrl.crearProducto)
-router.get('/validarProducto', Auth.verificarToken, ProductoCtrl.validarProducto)
+router.post('/validarProducto', Auth.verificarToken, ProductoCtrl.validarProducto)
 router.put('/actualizar', Auth.verificarToken, ProductoCtrl.actualizarProducto)
 router.delete('/eliminar', Auth.verificarToken, ProductoCtrl.eliminarProducto)
 router.get('/listar', Auth.verificarToken, ProductoCtrl.listar)

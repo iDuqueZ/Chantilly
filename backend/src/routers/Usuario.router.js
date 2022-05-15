@@ -4,7 +4,7 @@ const UsuarioCtrl = require('../controllers/Usuario.Controller')
 const Auth = require('../helper/Auth')
 
 router.post('/crear', UsuarioCtrl.crearUsuario)//*/
-router.get('/login', Auth.verificarToken, UsuarioCtrl.validarUsuario)//*/
+router.post('/login', UsuarioCtrl.validarUsuario)//*/
 router.put('/Actualizar', Auth.verificarToken, UsuarioCtrl.actualizarUsuario)//*/
 router.delete('/eliminar', Auth.verificarToken, UsuarioCtrl.eliminarUsuario)//*/
 router.get('/listar', Auth.verificarToken, UsuarioCtrl.listar)//*/

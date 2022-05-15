@@ -65,7 +65,7 @@ UsuariosCtr.validarUsuario = async(req,res) => {
         if (comparacion){
             token = jwt.sign({_id:Valuser._id},"Secreto")
             res.json({
-                mensaje: 'Bienvenido ' + Valuser.userName + " Inicio de seccion sactisfactorio",
+                mensaje: 'Bienvenido',
                 token: token,
                 Usuario: Valuser
             })

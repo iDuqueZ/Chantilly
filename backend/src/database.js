@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-URI = ("mongodb://localhost/bdChantilly");
+URI = ("mongodb+srv://iDuquez:AutonomaChantilly@cluster0.hi0pf.mongodb.net/chantilly?retryWrites=true&w=majority");
 
 mongoose.connect(URI, {
     useNewUrlParser: true,
