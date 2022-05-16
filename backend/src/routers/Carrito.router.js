@@ -8,5 +8,8 @@ router.put('/actualizar', Auth.verificarToken, CarritoCtrl.actualizarCarro)
 router.delete('/eliminar', Auth.verificarToken, CarritoCtrl.eliminarCarrito)
 router.get('/listar', Auth.verificarToken, CarritoCtrl.listar)
 router.get('/listar/:id', Auth.verificarToken, CarritoCtrl.listarId) 
+router.post('/agregarProducto', Auth.verificarToken, CarritoCtrl.agregarProducto) 
+router.post('/removerProducto', Auth.verificarToken, CarritoCtrl.removerProducto) 
+
 
 module.exports = router
