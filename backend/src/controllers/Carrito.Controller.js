@@ -27,7 +27,7 @@ CarritoCtrl.crearCarrito = async(req,res) => {
 }
 
 CarritoCtrl.actualizarCarro = async(req,res) => {
-    const{id,metodoPago,fecha,hora,idUsuario,estadoPedido} = req.body
+    const{id,metodoPago,susProductos,fecha,hora,idUsuario,estadoPedido} = req.body
     const Carrito = await Carro.findById({_id:id})
 
     if (!Carrito){
@@ -35,7 +35,7 @@ CarritoCtrl.actualizarCarro = async(req,res) => {
             mensaje: 'El producto ' + id + ' no existe'
         })
     }else{   
-        Carrito.susProductos = []
+        Carrito.susProductos = susProductos
         Carrito.metodoPago = metodoPago
         Carrito.fecha = fecha
         Carrito.hora = hora
