@@ -72,36 +72,36 @@ CarritoCtrl.actualizarCarro = async(req,res) => {
             token: token
         })    
     }
-}/*
+}
 
-ProductoCtrl.eliminarProducto = async(req,res) => {
-    const{nombre} = req.body    
-    const Prod = await Producto.findOne({nombre: nombre})
+CarritoCtrl.eliminarCarrito = async(req,res) => {
+    const{id} = req.body    
+    const car = await Carro.findById({_id: id})
 
-    if (!Prod){
+    if (!car){
         res.json({
-            mensaje: 'El producto no existe'
+            mensaje: 'El Carro no existe'
         })
     }else{   
-        await Producto.findByIdAndRemove({_id:Prod._id})
-        const token = jwt.sign({_id:Prod._id},"Secreto")
+        await Carro.findByIdAndRemove({_id:car._id})
+        const token = jwt.sign({_id:car._id},"Secreto")
         res.json({
-            mensaje: "Producto " + Prod.nombre + " fué eliminado",
+            mensaje: "Carro " + car._id + " fué eliminado",
             token, token
         })    
     }
 }
 
-ProductoCtrl.listar = async(req,res) => {
-    const respuesta = await Producto.find()
+CarritoCtrl.listar = async(req,res) => {
+    const respuesta = await Carro.find()
     res.json(respuesta)
 }
 
-ProductoCtrl.listarId = async(req,res) => {
+CarritoCtrl.listarId = async(req,res) => {
     const id = req.params.id
-    const respuesta = await Producto.findById({_id:id})
+    const respuesta = await Carro.findById({_id:id})
     res.json(respuesta)
-}
+}/*
 
 ProductoCtrl.buscarPorNombreDeProducto = async(req,res) => { 
     //Por alguna puta razón no funciona este metodo
