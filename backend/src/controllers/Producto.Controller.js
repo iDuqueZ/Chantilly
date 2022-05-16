@@ -49,43 +49,19 @@ ProductoCtrl.validarProducto = async(req,res) => {
 }
 
 ProductoCtrl.actualizarProducto = async(req,res) => {
-    const{nombre, precio, imagen, cantidad, categoria, descripcion} = req.body
-    const Prod = await Producto.findOne({nombre: nombre})
-
-    if (!Prod){
-        res.json({
-            mensaje: 'El producto ' + nombre + ' no existe'
-        })
-    }else{   
-        Prod.precio = precio
-        Prod.imagen = imagen
-        Prod.categoria = categoria
-        Prod.descripcion = descripcion        
-        const token = jwt.sign({_id:Prod._id},"Secreto")
-        await Prod.save()        
-        res.json({
-            mensaje: "El producto fué actualizado correctamente",
-            token: token
-        })    
-    }
+    const id = req.params.id
+    const respuesta = await Producto.findByIdAndUpdate({_id:id}, req.body)
+    res.json({
+        mensaje: 'Producto actualizado',
+    })
 }
 
 ProductoCtrl.eliminarProducto = async(req,res) => {
-    const{nombre} = req.body    
-    const Prod = await Producto.findOne({nombre: nombre})
-
-    if (!Prod){
-        res.json({
-            mensaje: 'El producto no existe'
-        })
-    }else{   
-        await Producto.findByIdAndRemove({_id:Prod._id})
-        const token = jwt.sign({_id:Prod._id},"Secreto")
-        res.json({
-            mensaje: "Producto " + Prod.nombre + " fué eliminado",
-            token, token
-        })    
-    }
+    const id = req.params.id
+    const respuesta = await Producto.findByIdAndRemove({_id:id})
+    res.json({
+        mensaje: 'Producto eliminado',
+    })
 }
 
 ProductoCtrl.listar = async(req,res) => {

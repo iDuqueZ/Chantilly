@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Ilustracion from '../img/ilustracionLogin.png'
 import '../styles/LoginUser.css'
 import TextField from '@mui/material/TextField';
+import NavBar from './NavOff';
 import Button from '@mui/material/Button'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
@@ -45,6 +46,7 @@ export default function LoginUser() {
 
   return (
     <div>
+      <NavBar/>
         <div className='bodyLoginUser'>
             <div className='ilustracion'>
                 <img alt='' src={Ilustracion}/>

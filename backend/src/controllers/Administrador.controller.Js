@@ -35,14 +35,14 @@ AdminsCtr.validarAdmin = async(req,res) => {
     const Valusuario = await Admin.findOne({usuario:usuario})
     if (!Valusuario){
         res.json({
-            mensaje: 'El Administrador no existe'
+            mensaje: 'El administrador no existe'
         })
     }else{
         const comparacion = await bcrypt.compare(contrasena,Valusuario.contrasena)
         if (comparacion){
             token = jwt.sign({_id:Valusuario._id},"Secreto")
             res.json({
-                mensaje: 'Bienvenido ' + Valusuario.usuario + " Inicio de seccion sactisfactorio",
+                mensaje: 'Bienvenido',
                 token: token
             })
         }else{
