@@ -24,7 +24,7 @@ ProductoCtrl.crearProducto = async(req,res) => {
         token = jwt.sign({_id:NuevoProducto._id},"Secreto")
         await NuevoProducto.save()
         res.json({
-            mensaje: "Bienvenido",
+            mensaje: "Producto creado con éxito",
             id: NuevoProducto.id,
             nombreDeProducro: NuevoProducto.nombre,
             token: token

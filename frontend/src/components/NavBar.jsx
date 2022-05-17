@@ -18,7 +18,7 @@ export default function NavBar() {
       Chantilly
       </Navbar.Brand>
         <Nav className="justify-content-end">
-        <Nav.Link href="/"><box-icon name='user' color='white' size='cssSize' ></box-icon></Nav.Link>
+        <Nav.Link href="/perfil"><box-icon name='user' color='white' size='cssSize' ></box-icon></Nav.Link>
         <Nav.Link href="/cart"><box-icon name='cart' color='white' size='cssSize' ></box-icon></Nav.Link>
       </Nav>
     </Container>

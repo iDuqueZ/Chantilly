@@ -79,48 +79,14 @@ UsuariosCtr.validarUsuario = async(req,res) => {
 }
 
 UsuariosCtr.actualizarUsuario = async(req,res) => {
-    const{userName,contrasena,correo,fechaNacimiento,direccion,telefono} = req.body
-    
-    const UsuarioUserName = await Usuario.findOne({userName:userName})
-    const UsuarioCorreo = await Usuario.findOne({correo:correo})
-
-    UsuarioUserName.correo = correo
-    UsuarioUserName.contrasena = contrasena
-    UsuarioUserName.fechaNacimiento = fechaNacimiento
-    UsuarioUserName.direccion = direccion
-    UsuarioUserName.telefono = telefono
-
-    if (!UsuarioUserName){
+    const id = req.params.id
+        const respuesta = await Usuario.findByIdAndUpdate({_id:id}, req.body)
         res.json({
-            mensaje: 'El usuario no existe'
-        })
-    }else if (UsuarioUserName.correo != correo && UsuarioCorreo){
-        res.json({
-            mensaje: 'El correo ya existe'
-        })
-    }else if (calcularEdad(fechaNacimiento) <= 18){//Validarfecha
-        res.json({
-            mensaje: 'No es un usuario mayor de edad'
+            mensaje: 'Usuario actualizado',
         })
     }
    
-    UsuarioUserName.contrasena = await bcrypt.hash(contrasena,10)
-    const token = jwt.sign({_id:UsuarioUserName._id},"Secreto")
-    res1 = await UsuarioUserName.save()
-    
-    res.json({
-        mensaje: "Bienvenido",
-        token: token,
-        res: res1/*,
-        data: ActualizarUsuario,
-        NomreUsuario: NuevoUsuario.userName,
-        contrasena: NuevoUsuario.contrasena,
-        correo: NuevoUsuario.correo,
-        fechaNacimiento: NuevoUsuario.fechaNacimiento,
-        direccion: NuevoUsuario.direccion,
-        telefono: NuevoUsuario.telefono//*/
-    })    
-}
+   
 
 UsuariosCtr.eliminarUsuario = async(req,res) => {
     const{userName,contrasena} = req.body    

@@ -5,7 +5,7 @@ const Auth = require('../helper/Auth')
 
 router.post('/crear', UsuarioCtrl.crearUsuario)//*/
 router.post('/login', UsuarioCtrl.validarUsuario)//*/
-router.put('/Actualizar', Auth.verificarToken, UsuarioCtrl.actualizarUsuario)//*/
+router.put('/actualizar/:id', UsuarioCtrl.actualizarUsuario)//*/
 router.delete('/eliminar', Auth.verificarToken, UsuarioCtrl.eliminarUsuario)//*/
 router.get('/listar', Auth.verificarToken, UsuarioCtrl.listar)//*/
 router.get('/listar/:id', Auth.verificarToken, UsuarioCtrl.listarId)//*/

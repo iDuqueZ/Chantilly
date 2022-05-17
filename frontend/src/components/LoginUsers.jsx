@@ -28,11 +28,10 @@ export default function LoginUser() {
             })
         }else {
             const token = respuesta.data.token
-            const user= respuesta.data.userName
-            const idUser= respuesta.data._id
+            const idUser= respuesta.data.Usuario._id
 
+            sessionStorage.setItem('res', respuesta.data)
             sessionStorage.setItem('token', token)
-            sessionStorage.setItem('user', user)
             sessionStorage.setItem('idUser', idUser)
             Swal.fire({
                 icon: 'success',

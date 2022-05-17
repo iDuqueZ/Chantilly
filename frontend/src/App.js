@@ -7,6 +7,9 @@ import LoginAdmin from './components/LoginAdmin';
 import Dashboard from './components/Dashboard';
 import Pedidos from './components/Pedidos';
 import Inventario from './components/Inventario';
+import NuevoProducto from './components/NuevoProducto';
+import Perfil from './components/Perfil';
+import EditarPerfil from './components/EditarPerfil';
 
 
 function App() {
@@ -20,6 +23,9 @@ function App() {
         <Route path='/dashboard' exact component={Dashboard}/>
         <Route path='/pedidos' exact component={Pedidos}/>
         <Route path='/inventario' exact component={Inventario}/>
+        <Route path='/producto/nuevo' exact component={NuevoProducto}/>
+        <Route path='/perfil' exact component={Perfil}/>
+        <Route path='/perfil/editar' exact component={EditarPerfil}/>
       </Router>
   );
 }
