@@ -2,70 +2,35 @@
 const CarritoCtrl = {}
 const Carro = require('../models/Carrito.model')
 const Producto = require('../models/Producto.model')
-const bcrypt = require('bcryptjs')
-const jwt = require('jsonwebtoken')
+
 
 CarritoCtrl.crearCarrito = async(req,res) => {
-    const{susProductos,metodoPago,fecha,hora,idUsuario,estadoPedido} = req.body
+    const{susProductos,idUsuario} = req.body
     const NuevoCarrito = new Carro({
         susProductos,
-        metodoPago,
-        fecha,
-        hora,
-        idUsuario,
-        estadoPedido
+        idUsuario
     })
 
-    token = jwt.sign({_id:NuevoCarrito._id},"Secreto")
     await NuevoCarrito.save()
     res.json({
-        mensaje: "Bienvenido",
-        id: NuevoCarrito.id,
-        nombreDelCarrito: NuevoCarrito.nombre,
-        token: token
+        mensaje: "Carro creado",
     })
 }
 
 CarritoCtrl.actualizarCarro = async(req,res) => {
-    const{id,metodoPago,susProductos,fecha,hora,idUsuario,estadoPedido} = req.body
-    const Carrito = await Carro.findById({_id:id})
-
-    if (!Carrito){
-        res.json({
-            mensaje: 'El producto ' + id + ' no existe'
-        })
-    }else{   
-        Carrito.susProductos = susProductos
-        Carrito.metodoPago = metodoPago
-        Carrito.fecha = fecha
-        Carrito.hora = hora
-        Carrito.idUsuario = idUsuario
-        Carrito.estadoPedido = estadoPedido
-        const token = jwt.sign({_id:Carrito._id},"Secreto")
-        await Carrito.save()        
-        res.json({
-            mensaje: "El producto fué actualizado correctamente",
-            token: token
-        })    
-    }
+    const id = req.params.id
+    const respuesta = await Producto.findByIdAndUpdate({_id:id}, req.body)
+    res.json({
+        mensaje: 'Producto actualizado',
+    })
 }
 
 CarritoCtrl.eliminarCarrito = async(req,res) => {
-    const{id} = req.body    
-    const car = await Carro.findById({_id: id})
-
-    if (!car){
-        res.json({
-            mensaje: 'El Carro no existe'
-        })
-    }else{   
-        await Carro.findByIdAndRemove({_id:car._id})
-        const token = jwt.sign({_id:car._id},"Secreto")
-        res.json({
-            mensaje: "Carro " + car._id + " fué eliminado",
-            token, token
-        })    
-    }
+    const id = req.params.id
+    const respuesta = await Producto.findByIdAndRemove({_id:id})
+    res.json({
+        mensaje: 'Producto eliminado',
+    })
 }
 
 CarritoCtrl.listar = async(req,res) => {
@@ -78,6 +43,21 @@ CarritoCtrl.listarId = async(req,res) => {
     const respuesta = await Carro.findById({_id:id})
     res.json(respuesta)
 }
+
+CarritoCtrl.listarPorUsuario = async(req,res) => {
+    const idUsuario = req.params.idUsuario;
+    try {
+        const respuesta = await Carro.find({idUsuario: idUsuario})
+        res.json(respuesta)
+    } catch (error) {
+        return res.status(400).json({
+            mensaje: 'No encontrado',
+            error
+        })
+    
+    }
+}
+
 
 CarritoCtrl.agregarProducto = async(req,res) => {
     const{idCarro,  idProducto} = req.body 
@@ -101,12 +81,10 @@ CarritoCtrl.agregarProducto = async(req,res) => {
             }
 
             carrito.susProductos.push(prod)
-            const token = jwt.sign({_id:carrito._id},"Secreto")
-            await carrito.save()        
+            const respuesta = await carrito.save()        
             res.json({
                 mensaje: "El producto fué agregado correctamente",
-                susProductos: carrito.susProductos,
-                token: token
+                respuesta
             })  
         }
     }
@@ -143,20 +121,18 @@ CarritoCtrl.removerProducto = async(req,res) => {
                 }
             }
 
-            const token = jwt.sign({_id:carrito._id},"Secreto")
-            await carrito.save() 
+
+            const respuesta= await carrito.save() 
                   
             if (primero) {
                 res.json({
                     mensaje: "El producto fué eliminado correctamente",
-                    susProductos: carrito.susProductos,
-                    token: token
+                    respuesta
                 })  
             }else{
                 res.json({
                     mensaje: "El producto no fué encontrado",
-                    susProductos:  carrito.susProductos,
-                    token: token
+                    respuesta
                 })  
             }
         }

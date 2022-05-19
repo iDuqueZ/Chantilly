@@ -19,6 +19,7 @@ app.use('/Admin', require('./routers/Administrador.router'))
 app.use('/User', require('./routers/Usuario.router'))
 app.use('/Producto', require('./routers/Producto.router'))
 app.use('/Carrito', require('./routers/Carrito.router'))
+app.use('/Pedido', require('./routers/Pedido.router'))
 
 app.listen(app.get('Port'), ()=> {
     console.log('Servidor esta escuchando por el puerto', app.get('Port'))

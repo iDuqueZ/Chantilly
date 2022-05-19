@@ -3,11 +3,7 @@ const {Schema} = mongoose
 
 const CarritoSchema = new Schema ({
     susProductos: {type:Array},
-    metodoPago: {type:String, default:"Efectivo"},
-    fecha: {type:Date, default:Date.now},
-    hora: {type:String, /*default:Date.now*/},
-    idUsuario: {type:String, reuiere: true},
-    estadoPedido: {type:String, default:"En espera"}
+    idUsuario: {type:String, reuiere: true}
 }) 
 
 module.exports = mongoose.model('carrito', CarritoSchema)

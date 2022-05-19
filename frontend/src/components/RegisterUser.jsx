@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import '../styles/LoginUser.css'
 import Button from '@mui/material/Button'
 import Ilustracion from '../img/fondoRegister.png'
+import NavBar from './NavOff'
 import { Form } from 'react-bootstrap'
 import Axios from 'axios'
 import Swal from 'sweetalert2'
@@ -14,6 +15,7 @@ const [correo, setCorreo] = useState ('')
 const [fechaNacimiento, setFechaN] = useState ('')
 const [direccion, setDireccion] = useState('')
 const [telefono, setTelefono] = useState('')
+// const [idUsuario, setId] = useState('');
 
 
 const register = async(e) =>{
@@ -75,6 +77,13 @@ const register = async(e) =>{
         console.log(respuesta);
 
         const mensaje = respuesta.data.mensaje
+        // setId(respuesta.data.respuesta._id)
+        console.log(respuesta.data.respuesta._id)
+        const idUsuario = respuesta.data.respuesta._id
+        const susProductos= [];
+        const carro = {susProductos, idUsuario}
+        const respuesta2 = await Axios.post('/Carrito/crear', carro);
+        console.log(respuesta2.data.mensaje)
 
         if(mensaje !== 'Bienvenido'){
             Swal.fire({
@@ -91,14 +100,18 @@ const register = async(e) =>{
                 showConfirmButton: false,
                 timer: 1500
             })
-            window.location.href = "/"
+            
         }
     }
 
 }
 
 
+
+
   return (
+    <div>
+        <NavBar/>
     <div className='bodyLoginUser'>
         <div className='Form'>
             <div className='contenedor2'>
@@ -148,6 +161,7 @@ const register = async(e) =>{
         <div className='ilustracion'>
             <img src={Ilustracion} alt="" />
         </div>
+    </div>
     </div>
   )
 }

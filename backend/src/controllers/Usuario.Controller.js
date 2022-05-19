@@ -43,11 +43,12 @@ UsuariosCtr.crearUsuario = async(req,res) => {
     }else{        
         NuevoUsuario.contrasena = await bcrypt.hash(contrasena,10)
         const token = jwt.sign({_id:NuevoUsuario._id},"Secreto")
-        await NuevoUsuario.save()
+        const respuesta = await NuevoUsuario.save()
         
         res.json({
             mensaje: "Bienvenido",
-            token: token
+            token: token,
+            respuesta
         })
     }
 }
