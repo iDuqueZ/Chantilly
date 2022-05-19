@@ -137,7 +137,7 @@ const register = async(e) =>{
                     <Form.Control type='date' className='form-control required' placeholder='Fecha' onChange={(e)=>setFechaN(e.target.value)}/>
                 </Form.Group>
                 <Form.Group className='col-sm-6'>
-                    <Form.Label>Telefonó</Form.Label>
+                    <Form.Label>Teléfono</Form.Label>
                     <Form.Control type='number' className='form-control required' placeholder='Digite tu número de celular' onChange={(e)=>setTelefono(e.target.value)}/>
                 </Form.Group>
                 <div></div>

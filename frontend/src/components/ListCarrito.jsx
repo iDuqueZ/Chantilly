@@ -69,6 +69,30 @@ const pedir = async(e) => {
 
 }
 
+const quitarProducto = (idProducto) => async(e) => {
+  e.preventDefault();
+  e.stopPropagation();
+
+  const car = {idCarro, idProducto}
+  const token = sessionStorage.getItem('token')
+  const respuesta = await axios.post('/carrito/removerProducto', car, {
+    headers : {'autorizacion': token}
+  })
+
+  console.log(respuesta);
+
+  Swal.fire({
+    icon: 'success',
+    title: respuesta.data.mensaje,
+    showConfirmButton: false,
+    timer: 2000
+  })
+
+  obtenerCarro();
+
+}
+
+const direccion = sessionStorage.getItem('direccion');
 
   return (
     <div className='principal'>
@@ -86,7 +110,7 @@ const pedir = async(e) => {
           <br></br>
           <h4>$ {producto.precio}</h4>
         </div>
-        <div className='BotonDelete'>Delete</div>
+        <div className='BotonDelete'><label onClick={quitarProducto(producto._id)}>Delete</label></div>
       </div>
       ))}
     </div>
@@ -126,7 +150,7 @@ const pedir = async(e) => {
 
       <div className='Direccion'>
             <h6>Dirección de envio</h6>
-            <h7 className='h7'>Calle 3</h7>
+            <h7 className='h7'>{direccion}</h7>
       </div>
 
       <div className='botonComprar'>
