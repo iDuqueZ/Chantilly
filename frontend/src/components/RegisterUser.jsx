@@ -78,12 +78,7 @@ const register = async(e) =>{
 
         const mensaje = respuesta.data.mensaje
         // setId(respuesta.data.respuesta._id)
-        console.log(respuesta.data.respuesta._id)
-        const idUsuario = respuesta.data.respuesta._id
-        const susProductos= [];
-        const carro = {susProductos, idUsuario}
-        const respuesta2 = await Axios.post('/Carrito/crear', carro);
-        console.log(respuesta2.data.mensaje)
+        
 
         if(mensaje !== 'Bienvenido'){
             Swal.fire({
@@ -92,6 +87,8 @@ const register = async(e) =>{
                 showConfirmButton: false,
                 timer: 1500
             })
+            
+
         }else {
             Swal.fire({
                 icon: 'success',
@@ -100,8 +97,16 @@ const register = async(e) =>{
                 showConfirmButton: false,
                 timer: 1500
             })
+            console.log(respuesta.data.respuesta._id)
+            const idUsuario = respuesta.data.respuesta._id
+            const susProductos= [];
+            const carro = {susProductos, idUsuario}
+            const respuesta2 = await Axios.post('/Carrito/crear', carro);
+            console.log(respuesta2.data.mensaje)
             
         }
+
+        
     }
 
 }
