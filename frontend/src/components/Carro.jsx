@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Nav } from 'react-bootstrap'
 import NavBar from './NavBar';
 import ListCarrito from './ListCarrito';
+import HistorialCompras from './HistorialCompras';
 import '../styles/Carro.css'
 
 export default function Carro() {
@@ -34,7 +35,7 @@ const handleSelect = (eventKey) =>{
         {(() => {
         if (selec === '2') {
           return (
-            <div>Historial</div>
+            <HistorialCompras/>
           )
         } else {
           return (   

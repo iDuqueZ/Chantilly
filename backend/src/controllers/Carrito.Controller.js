@@ -139,4 +139,15 @@ CarritoCtrl.removerProducto = async(req,res) => {
     }
 }
 
+CarritoCtrl.limpiarCarro= async(req,res) => {
+    const id = req.params.id;
+    const carrito = await Carro.findById({_id:id})
+    carrito.susProductos = []
+    const respuesta= await carrito.save() 
+    res.json({
+        mensaje: "Carro limpiado",
+        respuesta
+    })  
+}
+
 module.exports = CarritoCtrl

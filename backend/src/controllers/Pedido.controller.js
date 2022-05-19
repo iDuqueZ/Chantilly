@@ -2,16 +2,17 @@ const PedidoCtrl = {}
 const Pedido = require('../models/Pedido.model')
 
 PedidoCtrl.crear= async(req,res) => {
-    const{suCarrito,metodoPago,fecha,hora,estadoPedido} = req.body
-    const NuevoCarrito = new Carro({
+    const{suCarrito, idUsuario, metodoPago,fecha,hora,estadoPedido} = req.body
+    const NuevoPedido = new Pedido({
         suCarrito,
+        idUsuario,
         metodoPago,
         fecha,
         hora,
         estadoPedido
     })
 
-    const respuesta = await NuevoCarrito.save()
+    const respuesta = await NuevoPedido.save()
     res.json({
         mensaje: "Pedido realizado",
         respuesta

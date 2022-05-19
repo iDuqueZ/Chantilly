@@ -11,6 +11,7 @@ router.get('/listar/:id', Auth.verificarToken, CarritoCtrl.listarId)
 router.get('/listarPorUsuario/:idUsuario', Auth.verificarToken, CarritoCtrl.listarPorUsuario)
 router.post('/agregarProducto', Auth.verificarToken, CarritoCtrl.agregarProducto) 
 router.post('/removerProducto', Auth.verificarToken, CarritoCtrl.removerProducto) 
+router.delete('/limpiar/:id', Auth.verificarToken, CarritoCtrl.limpiarCarro)
 
 
 module.exports = router

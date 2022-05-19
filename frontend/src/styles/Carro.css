@@ -3,3 +3,32 @@
     margin: auto;
     margin-top: 40px;
 }
+
+.cajonPedido {
+    margin-top: 20px;
+    padding: 20px;
+    padding-left: 30px;
+    padding-right: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.proceso {
+    margin-top: 20px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.detalles{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.detalles div{
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}

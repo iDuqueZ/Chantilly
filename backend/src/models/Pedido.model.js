@@ -3,6 +3,7 @@ const {Schema} = mongoose
 
 const PedidoSchema = new Schema ({
     suCarrito: {type:Array},
+    idUsuario: {type:String},
     metodoPago: {type:String, default:"Efectivo"},
     fecha: {type:Date, default:Date.now},
     hora: {type:String, /*default:Date.now*/},
